@@ -1,74 +1,69 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+import { ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import React, { Suspense } from 'react'
+import { Canvas } from '@react-three/fiber/native'
+import Fox from '@/components/Fox'
+import { Environment } from '@react-three/drei'
+import Earth from '@/components/Earth'
+import Plane from '@/components/Plane'
+import useControls from "r3f-native-orbitcontrols"
+import Billet from '@/components/Billet'
+import { BottomSheetMethods } from '@devvie/bottom-sheet';
+import BottomSheetFly from '@/components/BottomSheet'
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+const index = () => {
+  const [OrbitControls, events] = useControls()
+  const sheetRef = React.useRef<BottomSheetMethods>(null);
 
-export default function HomeScreen() {
+  const openSheet = () => {
+    sheetRef.current?.open();
+  }
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12'
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
-  );
+    <ImageBackground style={styles.container} resizeMode="cover" source={require("@/assets/images/fly.png")} >
+
+      <Billet />
+
+      <TouchableOpacity style={styles.button} onPress={openSheet}>  
+        <Text>Voir plus</Text>
+      </TouchableOpacity>
+      {/* <View style={styles.bottom} {...events} >
+        <Canvas style={{ backgroundColor: "#191919" }} gl={{ preserveDrawingBuffer: true }} performance={{ min: 0.5 }}  camera={{ position: [5, 2, 10], fov: 50 }}>
+          <Suspense>
+            <OrbitControls />
+            <Plane />
+            <directionalLight position={[3.3, 1.0, 4.4]} intensity={4} />
+            <Environment preset="apartment" />
+          </Suspense>
+        </Canvas>
+      </View> */}
+      <BottomSheetFly sheetRef={sheetRef} />
+    </ImageBackground>
+  )
 }
 
+export default index
+
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'flex-end',
     alignItems: 'center',
-    gap: 8,
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  bottom:{
+    height:200,
+    width:"100%",
+    position:"absolute",
+    bottom:0,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
-  },
-});
+  button:{
+    width:"95%",
+    marginVertical:10,
+    borderRadius:40,
+    height:60,
+    backgroundColor:"#DFDAD4",
+    justifyContent:"center",  
+    alignItems:"center",
+  }
+
+})
