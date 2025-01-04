@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react'
-import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import BottomSheet from '@devvie/bottom-sheet';
 import { Iconify } from 'react-native-iconify';
 import { Colors } from '@/constants/Colors';
@@ -7,7 +7,8 @@ import OptionButton, { OptionButtonProps } from './OptionButton';
 import { Canvas } from '@react-three/fiber/native'
 import useControls from "r3f-native-orbitcontrols"
 import { Environment } from '@react-three/drei'
-import Plane from './Plane';
+import Model from './Model';
+
 
 interface BottomSheetProps {
     sheetRef: any
@@ -154,7 +155,7 @@ const BottomSheetFly: React.FC<BottomSheetProps> = ({ sheetRef }) => {
                                     // minZoom={5}
                                     maxAzimuthAngle={Math.PI / 2}
                                 />
-                                <Plane />
+                                <Model model={require("../assets/model/Plane.glb")} />
                                 <directionalLight position={[3.3, 1.0, 4.4]} intensity={4} />
                                 <Environment preset="apartment" />
                             </Suspense>

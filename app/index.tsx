@@ -1,17 +1,10 @@
-import { ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React, { Suspense } from 'react'
-import { Canvas } from '@react-three/fiber/native'
-import Fox from '@/components/Fox'
-import { Environment } from '@react-three/drei'
-import Earth from '@/components/Earth'
-import Plane from '@/components/Plane'
-import useControls from "r3f-native-orbitcontrols"
+import { ImageBackground, StyleSheet, Text, TouchableOpacity } from 'react-native'
+import React from 'react'
 import Billet from '@/components/Billet'
 import { BottomSheetMethods } from '@devvie/bottom-sheet';
 import BottomSheetFly from '@/components/BottomSheet'
 
 const index = () => {
-  const [OrbitControls, events] = useControls()
   const sheetRef = React.useRef<BottomSheetMethods>(null);
 
   const openSheet = () => {
@@ -26,16 +19,7 @@ const index = () => {
       <TouchableOpacity style={styles.button} onPress={openSheet}>  
         <Text>Voir plus</Text>
       </TouchableOpacity>
-      {/* <View style={styles.bottom} {...events} >
-        <Canvas style={{ backgroundColor: "#191919" }} gl={{ preserveDrawingBuffer: true }} performance={{ min: 0.5 }}  camera={{ position: [5, 2, 10], fov: 50 }}>
-          <Suspense>
-            <OrbitControls />
-            <Plane />
-            <directionalLight position={[3.3, 1.0, 4.4]} intensity={4} />
-            <Environment preset="apartment" />
-          </Suspense>
-        </Canvas>
-      </View> */}
+
       <BottomSheetFly sheetRef={sheetRef} />
     </ImageBackground>
   )
