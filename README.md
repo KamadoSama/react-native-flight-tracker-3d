@@ -9,7 +9,9 @@
 ---
 
 ## 📸 Aperçu  
-![Flight Tracker 3D](./assets/images/demo.gif)  
+<p align="center">
+  <img src="./assets/images/demo.giff" alt="Flight Tracker 3D" width="300"/>
+</p> 
 > *Une démonstration en action !*  
 
 ---
