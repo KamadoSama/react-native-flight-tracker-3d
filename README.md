@@ -10,7 +10,7 @@
 
 ## 📸 Aperçu  
 <p align="center">
-  <img src="./assets/images/demo.giff" alt="Flight Tracker 3D" width="300"/>
+  <img src="./assets/images/demo.gif" alt="Flight Tracker 3D" width="300"/>
 </p> 
 > *Une démonstration en action !*  
 
